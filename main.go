@@ -28,6 +28,7 @@ func main() {
 		Bind: []interface{}{
 			app,
 		},
+		AlwaysOnTop: true,
 	})
 
 	if err != nil {
