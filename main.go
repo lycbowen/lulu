@@ -2,6 +2,8 @@ package main
 
 import (
 	"embed"
+	"encoding/json"
+	"os"
 
 	"github.com/wailsapp/wails/v2"
 	"github.com/wailsapp/wails/v2/pkg/options"
@@ -11,6 +13,36 @@ import (
 //go:embed all:frontend/dist
 var assets embed.FS
 
+type Config struct {
+	FitMode      string `json:"fit_mode"`
+	PlaySpeed    int    `json:"play_speed"`
+	AlwaysOnTop  bool   `json:"always_on_top"`
+	WindowWidth  int    `json:"window_width"`
+	WindowHeight int    `json:"window_height"`
+}
+
+var Cfg = Config{}
+
+func init() {
+	f, err := os.ReadFile("config")
+	if err != nil {
+		defaultConfig := Config{
+			FitMode:      "contain",
+			PlaySpeed:    5000,
+			AlwaysOnTop:  false,
+			WindowWidth:  800,
+			WindowHeight: 600,
+		}
+		Cfg = defaultConfig
+		cfg, _ := json.Marshal(defaultConfig)
+		newfile, _ := os.OpenFile("config", os.O_WRONLY|os.O_CREATE|os.O_TRUNC, 0644)
+		defer newfile.Close()
+		newfile.Write(cfg)
+		return
+	}
+	json.Unmarshal(f, &Cfg)
+}
+
 func main() {
 	// Create an instance of the app structure
 	app := NewApp()
@@ -18,8 +50,8 @@ func main() {
 	// Create application with options
 	err := wails.Run(&options.App{
 		Title:  "lulu",
-		Width:  1024,
-		Height: 768,
+		Width:  Cfg.WindowWidth,
+		Height: Cfg.WindowHeight,
 		AssetServer: &assetserver.Options{
 			Assets: assets,
 		},
@@ -28,7 +60,7 @@ func main() {
 		Bind: []interface{}{
 			app,
 		},
-		AlwaysOnTop: true,
+		AlwaysOnTop: Cfg.AlwaysOnTop,
 	})
 
 	if err != nil {
