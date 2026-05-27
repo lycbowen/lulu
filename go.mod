@@ -1,4 +1,4 @@
-module lulu
+module luluframe
 
 go 1.23
 

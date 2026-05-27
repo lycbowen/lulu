@@ -97,7 +97,7 @@ func writeConfigGuide(path string) {
 		return
 	}
 
-	content := `lulu 照片播放器配置说明
+	content := `LuluFrame 照片播放器配置说明
 
 本文件和 config.json 位于程序同一目录。
 第一次运行时，程序会自动生成 config.json、config说明.txt 和默认 photos 文件夹。
@@ -160,7 +160,7 @@ func main() {
 
 	// Create application with options
 	err := wails.Run(&options.App{
-		Title:  "lulu",
+		Title:  "LuluFrame",
 		Width:  Cfg.WindowWidth,
 		Height: Cfg.WindowHeight,
 		AssetServer: &assetserver.Options{
