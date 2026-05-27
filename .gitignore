@@ -2,4 +2,5 @@ build/bin
 node_modules
 frontend/dist
 .DS_Store
-config
+config.json
+package.json.md5
