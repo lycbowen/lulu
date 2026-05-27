@@ -3,3 +3,5 @@
 import {main} from '../models';
 
 export function GetConfig():Promise<main.Config>;
+
+export function GetImages():Promise<Array<string>>;

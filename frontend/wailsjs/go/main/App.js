@@ -5,3 +5,7 @@
 export function GetConfig() {
   return window['go']['main']['App']['GetConfig']();
 }
+
+export function GetImages() {
+  return window['go']['main']['App']['GetImages']();
+}

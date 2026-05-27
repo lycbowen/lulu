@@ -11,5 +11,30 @@
     width: 100%;
     height: 100%;
     display: block;
-    /* 防止 img 底部留白 */
+}
+
+.empty-state {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    padding: 24px;
+    color: #eef4ff;
+    background: #1b2636;
+    text-align: center;
+}
+
+.empty-title {
+    font-size: 22px;
+    font-weight: 700;
+}
+
+.empty-text {
+    max-width: 680px;
+    color: #b9c5d8;
+    font-size: 15px;
+    line-height: 1.6;
+    word-break: break-all;
 }
